@@ -34,14 +34,14 @@ namespace SFF.Models
         // public int StudioId { get; set; }
         // public Studio Studio { get; set; }
 
-        public int RentalId { get; set; }
-        public IList<Rental> Rental { get; set; }
+        // public IList<Rental> Rental { get; set; }
 
-        public int TriviaId { get; set; }
         public IList<Trivia> Trivia { get; set; }
 
-        public int RatingId { get; set; }
         public IList<Rating> Rating { get; set; }
+
+        public int RentalId { get; set; }
+        public Rental Rental { get; set; }
 
         public bool IsAvailable()
         {

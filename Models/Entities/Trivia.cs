@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SFF.Models
 {
@@ -18,9 +19,11 @@ namespace SFF.Models
         }
 
         public string TriviaText { get; private set; }
+
         public int MovieId { get; private set; }
         public Movie Movie { get; private set; }
-        public int StudioId { get; private set; }
-        public Studio Studio { get; private set; }
+
+        // public int StudioId { get; private set; }
+        // public List<Studio> Studio { get; private set; }
     }
 }
