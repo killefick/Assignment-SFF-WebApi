@@ -3,25 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SFF.Migrations
 {
-    public partial class test : Migration
+    public partial class start : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Movies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
-                    CoverPicture = table.Column<byte[]>(nullable: true),
-                    AmountInStock = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Studios",
                 columns: table => new
@@ -50,12 +35,6 @@ namespace SFF.Migrations
                 {
                     table.PrimaryKey("PK_Ratings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ratings_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Ratings_Studios_StudioId",
                         column: x => x.StudioId,
                         principalTable: "Studios",
@@ -75,12 +54,6 @@ namespace SFF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rentals", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rentals_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Rentals_Studios_StudioId",
                         column: x => x.StudioId,
@@ -103,18 +76,41 @@ namespace SFF.Migrations
                 {
                     table.PrimaryKey("PK_Trivias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trivias_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Trivias_Studios_StudioId",
                         column: x => x.StudioId,
                         principalTable: "Studios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Movies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(nullable: true),
+                    CoverPicture = table.Column<byte[]>(nullable: true),
+                    AmountInStock = table.Column<int>(nullable: false),
+                    RentalId = table.Column<int>(nullable: false),
+                    TriviaId = table.Column<int>(nullable: false),
+                    RatingId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Movies_Trivias_TriviaId",
+                        column: x => x.TriviaId,
+                        principalTable: "Trivias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_TriviaId",
+                table: "Movies",
+                column: "TriviaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_MovieId",
@@ -145,10 +141,38 @@ namespace SFF.Migrations
                 name: "IX_Trivias_StudioId",
                 table: "Trivias",
                 column: "StudioId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Ratings_Movies_MovieId",
+                table: "Ratings",
+                column: "MovieId",
+                principalTable: "Movies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Rentals_Movies_MovieId",
+                table: "Rentals",
+                column: "MovieId",
+                principalTable: "Movies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Trivias_Movies_MovieId",
+                table: "Trivias",
+                column: "MovieId",
+                principalTable: "Movies",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Movies_Trivias_TriviaId",
+                table: "Movies");
+
             migrationBuilder.DropTable(
                 name: "Ratings");
 

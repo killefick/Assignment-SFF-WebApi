@@ -9,8 +9,8 @@ using SFF.Context;
 namespace SFF.Migrations
 {
     [DbContext(typeof(myDbContext))]
-    [Migration("20200503172426_test")]
-    partial class test
+    [Migration("20200503180853_start")]
+    partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,10 +30,21 @@ namespace SFF.Migrations
                     b.Property<byte[]>("CoverPicture")
                         .HasColumnType("BLOB");
 
+                    b.Property<int>("RatingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RentalId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("TriviaId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TriviaId");
 
                     b.ToTable("Movies");
                 });
@@ -122,6 +133,15 @@ namespace SFF.Migrations
                     b.HasIndex("StudioId");
 
                     b.ToTable("Trivias");
+                });
+
+            modelBuilder.Entity("SFF.Models.Movie", b =>
+                {
+                    b.HasOne("SFF.Models.Trivia", null)
+                        .WithMany()
+                        .HasForeignKey("TriviaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SFF.Models.Rating", b =>

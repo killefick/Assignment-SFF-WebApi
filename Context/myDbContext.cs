@@ -20,14 +20,19 @@ namespace SFF.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Rental>()
-                        .HasOne(t => t.Movie)
-                        .WithMany(t => t.Rental)
-                        .HasForeignKey(t => t.MovieId);
+                        .HasOne(r => r.Movie)
+                        .WithMany(r => r.Rental)
+                        .HasForeignKey(r => r.MovieId);
 
             modelBuilder.Entity<Rental>()
                         .HasOne(t => t.Studio)
                         .WithMany(t => t.Rental)
                         .HasForeignKey(t => t.StudioId);
+
+            modelBuilder.Entity<Movie>()
+                        .HasOne<Trivia>()
+                        .WithMany()
+                        .HasForeignKey(m => m.TriviaId);
         }
     }
 }

@@ -24,6 +24,9 @@ namespace SFF.Models
         public string Name { get; private set; }
         public string Location { get; private set; }
 
+        // public int MovieId { get; set; }
+        // public Movie Movie { get; set; }
+
         public IList<Rental> Rental { get; set; } //collection navigation property
 
     }
