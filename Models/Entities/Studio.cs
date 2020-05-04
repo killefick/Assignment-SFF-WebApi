@@ -21,9 +21,9 @@ namespace SFF.Models
             this.Location = location;
         }
 
-        public string Name { get;  set; }
-        public string Location { get;  set; }
+        public string Name { get;  private set; }
+        public string Location { get;  private set; }
 
-        public ICollection<Rental> Rentals { get; set; }
+        public ICollection<Rental> Rentals { get; private set; }
     }
 }

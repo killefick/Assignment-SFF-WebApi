@@ -21,12 +21,13 @@ namespace SFF.Models
             this.StudioId = studioId;
         }
 
-        public double Score { get; set; }
+        public double Score { get; private set; }
 
-        public int MovieId { get; set; }
-        public Movie Movie { get; set; }
+        //reference navigation property
+        public int MovieId { get; private set; }
+        public Movie Movie { get; private set; }
 
-        public int StudioId { get; set; }
-        public Studio Studio { get; set; }
+        public int StudioId { get; private set; }
+        public Studio Studio { get; private set; }
     }
 }

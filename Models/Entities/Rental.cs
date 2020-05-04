@@ -7,12 +7,14 @@ namespace SFF.Models
 {
     public class Rental : BaseEntity
     {
-        public int MovieId { get; set; }
-        public Movie Movie { get; set; }
+        // reference navigation property
+        public int MovieId { get; private set; }
+        public Movie Movie { get; private set; }
 
-        public int StudioId { get; set; }
-        public Studio Studio { get; set; }
+        public int StudioId { get; private set; }
+        public Studio Studio { get; private set; }
 
+        #region public Methods
         public async Task<Rental> RentMovie(myDbContext _context)
         {
             // kolla aktuella uthyrningar
@@ -34,5 +36,6 @@ namespace SFF.Models
             // returnera null om det inte finns lediga filmer annars returnera filmen
             return movie.IsAvailable() ? this : null;
         }
+        #endregion
     }
 }

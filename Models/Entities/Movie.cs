@@ -27,16 +27,17 @@ namespace SFF.Models
             this.AmountInStock = amountInStock;
         }
 
-        public string Title { get; set; }
-        public byte[] CoverPicture { get; set; }
-        public int AmountInStock { get; set; }
+        public string Title { get; private set; }
+        public byte[] CoverPicture { get; private set; }
+        public int AmountInStock { get; private set; }
 
-        public ICollection<Trivia> Trivias { get; set; }
+        public ICollection<Trivia> Trivias { get; private set; }
 
-        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Rating> Ratings { get; private set; }
 
-        public ICollection<Rental> Rentals { get; set; }
+        public ICollection<Rental> Rentals { get; private set; }
 
+        #region public Methods
         public bool IsAvailable()
         {
             return (this.AmountInStock > 0) ? true : false;
@@ -53,5 +54,6 @@ namespace SFF.Models
             this.AmountInStock += 1;
             return this;
         }
+        #endregion
     }
 }

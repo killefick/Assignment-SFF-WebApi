@@ -21,12 +21,12 @@ namespace SFF.Models
             this.MovieId = movieId;
         }
 
-        public string TriviaText { get; set; }
+        public string TriviaText { get; private set; }
 
-        public int MovieId { get; set; }
-        public Movie Movie { get; set; }
+        public int MovieId { get; private set; }
+        public Movie Movie { get; private set; }
 
-        public int StudioId { get; set; }
-        public Studio Studio { get; set; }
+        public int StudioId { get; private set; }
+        public Studio Studio { get; private set; }
     }
 }
