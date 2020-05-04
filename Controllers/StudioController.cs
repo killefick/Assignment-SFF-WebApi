@@ -23,36 +23,36 @@ namespace SFF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudioDto>>> GetStudios()
         {
-            var Studios = await _repository.GetAll();
-            var result = _mapper.Map<List<StudioDto>>(Studios);
+            var studios = await _repository.GetAll();
+            var result = _mapper.Map<List<StudioDto>>(studios);
             return result;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<StudioDto>> GetStudio(int id)
         {
-            var Studio = await _repository.GetById(id);
+            var studio = await _repository.GetById(id);
 
-            if (Studio == null)
+            if (studio == null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<StudioDto>(Studio);
+            return _mapper.Map<StudioDto>(studio);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudio(int id, StudioDto StudioDto)
+        public async Task<IActionResult> PutStudio(int id, StudioDto studioDto)
         {
-            if (id != StudioDto.Id)
+            if (id != studioDto.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                var Studio = _mapper.Map<Studio>(StudioDto);
-                await _repository.Update(Studio);
+                var studio = _mapper.Map<Studio>(studioDto);
+                await _repository.Update(studio);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,11 +69,11 @@ namespace SFF.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudioDto>> PostStudio(StudioDto StudioDto)
+        public async Task<ActionResult<StudioDto>> PostStudio(StudioDto studioDto)
         {
-            var Studio = _mapper.Map<Studio>(StudioDto);
-            Studio = await _repository.Add(Studio);
-            var result = _mapper.Map<StudioDto>(Studio);
+            var studio = _mapper.Map<Studio>(studioDto);
+            studio = await _repository.Add(studio);
+            var result = _mapper.Map<StudioDto>(studio);
 
             return CreatedAtAction("GetStudio", new { id = result.Id }, result);
         }
@@ -81,15 +81,15 @@ namespace SFF.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<StudioDto>> DeleteStudio(int id)
         {
-            var Studio = await _repository.GetById(id);
+            var studio = await _repository.GetById(id);
 
-            if (Studio == null)
+            if (studio == null)
             {
                 return NotFound();
             }
 
-            await _repository.Remove(Studio);
-            var result = _mapper.Map<StudioDto>(Studio);
+            await _repository.Remove(studio);
+            var result = _mapper.Map<StudioDto>(studio);
             return result;
         }
 

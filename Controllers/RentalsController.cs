@@ -23,36 +23,36 @@ namespace SFF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RentalDto>>> GetRentals()
         {
-            var Rentals = await _repository.GetAll();
-            var result = _mapper.Map<List<RentalDto>>(Rentals);
+            var rentals = await _repository.GetAll();
+            var result = _mapper.Map<List<RentalDto>>(rentals);
             return result;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<RentalDto>> GetRental(int id)
         {
-            var Rental = await _repository.GetById(id);
+            var rental = await _repository.GetById(id);
 
-            if (Rental == null)
+            if (rental == null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<RentalDto>(Rental);
+            return _mapper.Map<RentalDto>(rental);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRental(int id, RentalDto RentalDto)
+        public async Task<IActionResult> PutRental(int id, RentalDto rentalDto)
         {
-            if (id != RentalDto.Id)
+            if (id != rentalDto.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                var Rental = _mapper.Map<Rental>(RentalDto);
-                await _repository.Update(Rental);
+                var rental = _mapper.Map<Rental>(rentalDto);
+                await _repository.Update(rental);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,11 +69,11 @@ namespace SFF.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RentalDto>> PostRental(RentalDto RentalDto)
+        public async Task<ActionResult<RentalDto>> PostRental(RentalDto rentalDto)
         {
-            var Rental = _mapper.Map<Rental>(RentalDto);
-            Rental = await _repository.Add(Rental);
-            var result = _mapper.Map<RentalDto>(Rental);
+            var rental = _mapper.Map<Rental>(rentalDto);
+            rental = await _repository.Add(rental);
+            var result = _mapper.Map<RentalDto>(rental);
 
             return CreatedAtAction("GetRental", new { id = result.Id }, result);
         }
@@ -81,15 +81,15 @@ namespace SFF.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<RentalDto>> DeleteRental(int id)
         {
-            var Rental = await _repository.GetById(id);
+            var rental = await _repository.GetById(id);
 
-            if (Rental == null)
+            if (rental == null)
             {
                 return NotFound();
             }
 
-            await _repository.Remove(Rental);
-            var result = _mapper.Map<RentalDto>(Rental);
+            await _repository.Remove(rental);
+            var result = _mapper.Map<RentalDto>(rental);
             return result;
         }
 

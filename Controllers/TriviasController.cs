@@ -23,36 +23,36 @@ namespace SFF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TriviaDto>>> GetTrivias()
         {
-            var Trivias = await _repository.GetAll();
-            var result = _mapper.Map<List<TriviaDto>>(Trivias);
+            var trivias = await _repository.GetAll();
+            var result = _mapper.Map<List<TriviaDto>>(trivias);
             return result;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TriviaDto>> GetTrivia(int id)
         {
-            var Trivia = await _repository.GetById(id);
+            var trivia = await _repository.GetById(id);
 
-            if (Trivia == null)
+            if (trivia == null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<TriviaDto>(Trivia);
+            return _mapper.Map<TriviaDto>(trivia);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrivia(int id, TriviaDto TriviaDto)
+        public async Task<IActionResult> PutTrivia(int id, TriviaDto triviaDto)
         {
-            if (id != TriviaDto.Id)
+            if (id != triviaDto.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                var Trivia = _mapper.Map<Trivia>(TriviaDto);
-                await _repository.Update(Trivia);
+                var trivia = _mapper.Map<Trivia>(triviaDto);
+                await _repository.Update(trivia);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,11 +69,17 @@ namespace SFF.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TriviaDto>> PostTrivia(TriviaDto TriviaDto)
+        public async Task<ActionResult<TriviaDto>> PostTrivia(TriviaDto triviaDto)
         {
-            var Trivia = _mapper.Map<Trivia>(TriviaDto);
-            Trivia = await _repository.Add(Trivia);
-            var result = _mapper.Map<TriviaDto>(Trivia);
+            var trivia = _mapper.Map<Trivia>(triviaDto);
+
+            trivia.MovieId = triviaDto.MovieId;
+            trivia.StudioId = triviaDto.StudioId;
+            trivia.TriviaText = triviaDto.TriviaText;
+
+            trivia = await _repository.Add(trivia);
+
+            var result = _mapper.Map<TriviaDto>(trivia);
 
             return CreatedAtAction("GetTrivia", new { id = result.Id }, result);
         }
@@ -81,15 +87,15 @@ namespace SFF.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<TriviaDto>> DeleteTrivia(int id)
         {
-            var Trivia = await _repository.GetById(id);
+            var trivia = await _repository.GetById(id);
 
-            if (Trivia == null)
+            if (trivia == null)
             {
                 return NotFound();
             }
 
-            await _repository.Remove(Trivia);
-            var result = _mapper.Map<TriviaDto>(Trivia);
+            await _repository.Remove(trivia);
+            var result = _mapper.Map<TriviaDto>(trivia);
             return result;
         }
 

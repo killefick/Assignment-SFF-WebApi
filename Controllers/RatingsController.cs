@@ -23,36 +23,36 @@ namespace SFF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RatingDto>>> GetRatings()
         {
-            var Ratings = await _repository.GetAll();
-            var result = _mapper.Map<List<RatingDto>>(Ratings);
+            var ratings = await _repository.GetAll();
+            var result = _mapper.Map<List<RatingDto>>(ratings);
             return result;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<RatingDto>> GetRating(int id)
         {
-            var Rating = await _repository.GetById(id);
+            var rating = await _repository.GetById(id);
 
-            if (Rating == null)
+            if (rating == null)
             {
                 return NotFound();
             }
 
-            return _mapper.Map<RatingDto>(Rating);
+            return _mapper.Map<RatingDto>(rating);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRating(int id, RatingDto RatingDto)
+        public async Task<IActionResult> PutRating(int id, RatingDto ratingDto)
         {
-            if (id != RatingDto.Id)
+            if (id != ratingDto.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                var Rating = _mapper.Map<Rating>(RatingDto);
-                await _repository.Update(Rating);
+                var rating = _mapper.Map<Rating>(ratingDto);
+                await _repository.Update(rating);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +72,10 @@ namespace SFF.Controllers
         public async Task<ActionResult<RatingDto>> PostRating(RatingDto ratingDto)
         {
             var rating = _mapper.Map<Rating>(ratingDto);
-            // rating.MovieId = ratingDto.MovieId;
+
+            rating.MovieId = ratingDto.MovieId;
+            rating.StudioId = ratingDto.StudioId;
+            
             rating = await _repository.Add(rating);
             var result = _mapper.Map<RatingDto>(rating);
 
@@ -82,15 +85,15 @@ namespace SFF.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<RatingDto>> DeleteRating(int id)
         {
-            var Rating = await _repository.GetById(id);
+            var rating = await _repository.GetById(id);
 
-            if (Rating == null)
+            if (rating == null)
             {
                 return NotFound();
             }
 
-            await _repository.Remove(Rating);
-            var result = _mapper.Map<RatingDto>(Rating);
+            await _repository.Remove(rating);
+            var result = _mapper.Map<RatingDto>(rating);
             return result;
         }
 
