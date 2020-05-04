@@ -88,19 +88,16 @@ namespace SFF.Migrations
 
             modelBuilder.Entity("SFF.Models.Rental", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StudioId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("MovieId");
+                    b.HasKey("MovieId", "StudioId");
 
                     b.HasIndex("StudioId");
 

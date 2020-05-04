@@ -9,8 +9,8 @@ using SFF.Context;
 namespace SFF.Migrations
 {
     [DbContext(typeof(myDbContext))]
-    [Migration("20200504112159_test")]
-    partial class test
+    [Migration("20200504155303_setup")]
+    partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,19 +90,16 @@ namespace SFF.Migrations
 
             modelBuilder.Entity("SFF.Models.Rental", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StudioId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("MovieId");
+                    b.HasKey("MovieId", "StudioId");
 
                     b.HasIndex("StudioId");
 

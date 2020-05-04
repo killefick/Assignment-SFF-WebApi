@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SFF.Migrations
 {
-    public partial class test : Migration
+    public partial class setup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,14 +89,13 @@ namespace SFF.Migrations
                 name: "Rentals",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     MovieId = table.Column<int>(nullable: false),
-                    StudioId = table.Column<int>(nullable: false)
+                    StudioId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rentals", x => x.Id);
+                    table.PrimaryKey("PK_Rentals", x => new { x.MovieId, x.StudioId });
                     table.ForeignKey(
                         name: "FK_Rentals_Movies_MovieId",
                         column: x => x.MovieId,
@@ -153,11 +152,6 @@ namespace SFF.Migrations
                 name: "IX_Ratings_StudioId",
                 table: "Ratings",
                 column: "StudioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rentals_MovieId",
-                table: "Rentals",
-                column: "MovieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_StudioId",

@@ -9,6 +9,12 @@ namespace SFF.Context
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Rental>().HasKey(r => new { r.MovieId, r.StudioId });
+        }
+
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Studio> Studios { get; set; }
