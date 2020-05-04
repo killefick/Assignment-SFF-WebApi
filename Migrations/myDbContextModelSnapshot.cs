@@ -16,6 +16,32 @@ namespace SFF.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
+            modelBuilder.Entity("SFF.Models.EtikettData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilmNamn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Ort")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId")
+                        .IsUnique();
+
+                    b.ToTable("EtikettData");
+                });
+
             modelBuilder.Entity("SFF.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -62,16 +88,19 @@ namespace SFF.Migrations
 
             modelBuilder.Entity("SFF.Models.Rental", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StudioId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Id");
 
-                    b.HasKey("MovieId", "StudioId");
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("StudioId");
 
@@ -117,6 +146,15 @@ namespace SFF.Migrations
                     b.HasIndex("StudioId");
 
                     b.ToTable("Trivias");
+                });
+
+            modelBuilder.Entity("SFF.Models.EtikettData", b =>
+                {
+                    b.HasOne("SFF.Models.Movie", "Movie")
+                        .WithOne("etikettData")
+                        .HasForeignKey("SFF.Models.EtikettData", "MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SFF.Models.Rating", b =>

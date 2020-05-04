@@ -5,7 +5,7 @@ using SFF.Context;
 
 namespace SFF.Models
 {
-    public class Rental
+    public class Rental : BaseEntity
     {
         // foreign key property
         public int MovieId { get; private set; }

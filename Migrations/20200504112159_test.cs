@@ -37,6 +37,28 @@ namespace SFF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EtikettData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FilmNamn = table.Column<string>(nullable: true),
+                    Ort = table.Column<string>(nullable: true),
+                    Datum = table.Column<DateTime>(nullable: false),
+                    MovieId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EtikettData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EtikettData_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ratings",
                 columns: table => new
                 {
@@ -67,13 +89,14 @@ namespace SFF.Migrations
                 name: "Rentals",
                 columns: table => new
                 {
-                    MovieId = table.Column<int>(nullable: false),
-                    StudioId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MovieId = table.Column<int>(nullable: false),
+                    StudioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rentals", x => new { x.MovieId, x.StudioId });
+                    table.PrimaryKey("PK_Rentals", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Rentals_Movies_MovieId",
                         column: x => x.MovieId,
@@ -116,6 +139,12 @@ namespace SFF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EtikettData_MovieId",
+                table: "EtikettData",
+                column: "MovieId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_MovieId",
                 table: "Ratings",
                 column: "MovieId");
@@ -124,6 +153,11 @@ namespace SFF.Migrations
                 name: "IX_Ratings_StudioId",
                 table: "Ratings",
                 column: "StudioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rentals_MovieId",
+                table: "Rentals",
+                column: "MovieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_StudioId",
@@ -143,6 +177,9 @@ namespace SFF.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "EtikettData");
+
             migrationBuilder.DropTable(
                 name: "Ratings");
 

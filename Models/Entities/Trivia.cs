@@ -9,7 +9,7 @@ namespace SFF.Models
             // for EF only
         }
 
-        public Trivia(string triviaText, int movieId, int studioId)
+        public Trivia(string triviaText, int studioId, int movieId)
         {
             if (string.IsNullOrWhiteSpace(triviaText))
             {

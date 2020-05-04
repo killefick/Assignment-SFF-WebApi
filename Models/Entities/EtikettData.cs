@@ -5,7 +5,7 @@ using SFF.Context;
 
 namespace SFF.Models
 {
-    public class EtikettData
+    public class EtikettData : BaseEntity
     {
         private EtikettData()
         {
@@ -20,11 +20,17 @@ namespace SFF.Models
             }
             this.FilmNamn = filename;
             this.Ort = location;
+            this.Datum = DateTime.Now;
         }
 
         public string FilmNamn { get; private set; }
         public string Ort { get; private set; }
         public DateTime Datum { get; private set; }
+
+        // foreign key property
+        public int MovieId { get; set; }
+        // reference property
+        public Movie Movie { get; set; }
 
         // public async Task<ActionResult<EtikettData>> GetEtikettData(myDbContext _context, int movieId, int studioId)
         // {

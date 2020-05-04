@@ -14,23 +14,5 @@ namespace SFF.Context
         public DbSet<Studio> Studios { get; set; }
         public DbSet<Trivia> Trivias { get; set; }
         public DbSet<Rental> Rentals { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // one to many
-            modelBuilder.Entity<Movie>()
-                        .HasMany(m => m.Ratings)
-                        .WithOne(r => r.Movie);
-
-            // one to many
-            modelBuilder.Entity<Movie>()
-                        .HasMany(m => m.Trivias)
-                        .WithOne(t => t.Movie);
-
-            // many to many
-            // composite key
-            modelBuilder.Entity<Rental>()
-                        .HasKey(r => new { r.MovieId, r.StudioId });
-        }
     }
 }
