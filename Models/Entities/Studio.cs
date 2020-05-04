@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace SFF.Models
@@ -22,8 +21,8 @@ namespace SFF.Models
             this.Location = location;
         }
 
-        public string Name { get; private set; }
-        public string Location { get; private set; }
+        public string Name { get;  set; }
+        public string Location { get;  set; }
 
         public ICollection<Rental> Rentals { get; set; }
     }
