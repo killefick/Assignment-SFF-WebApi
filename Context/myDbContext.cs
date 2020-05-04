@@ -15,20 +15,17 @@ namespace SFF.Context
         public DbSet<Trivia> Trivias { get; set; }
         public DbSet<Rental> Rentals { get; set; }
 
-
-        // Specify DbSet properties etc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()
                         .HasMany(m => m.Ratings)
-                        .WithOne(r => r.Movie)
-                        .IsRequired();
+                        .WithOne(r => r.Movie);
 
             modelBuilder.Entity<Movie>()
                         .HasMany(m => m.Trivias)
-                        .WithOne(t => t.Movie)
-                        .IsRequired();
+                        .WithOne(t => t.Movie);
 
+            // PK 
             modelBuilder.Entity<Rental>()
                         .HasKey(r => new { r.MovieId, r.StudioId });
 

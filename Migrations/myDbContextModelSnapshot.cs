@@ -42,15 +42,20 @@ namespace SFF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MovieId")
+                    b.Property<int?>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Score")
                         .HasColumnType("REAL");
 
+                    b.Property<int?>("StudioId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("StudioId");
 
                     b.ToTable("Ratings");
                 });
@@ -66,12 +71,7 @@ namespace SFF.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MovieId1")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("MovieId", "StudioId");
-
-                    b.HasIndex("MovieId1");
 
                     b.HasIndex("StudioId");
 
@@ -101,7 +101,10 @@ namespace SFF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MovieId")
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("StudioId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TriviaText")
@@ -111,6 +114,8 @@ namespace SFF.Migrations
 
                     b.HasIndex("MovieId");
 
+                    b.HasIndex("StudioId");
+
                     b.ToTable("Trivias");
                 });
 
@@ -118,9 +123,11 @@ namespace SFF.Migrations
                 {
                     b.HasOne("SFF.Models.Movie", "Movie")
                         .WithMany("Ratings")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovieId");
+
+                    b.HasOne("SFF.Models.Studio", "Studio")
+                        .WithMany()
+                        .HasForeignKey("StudioId");
                 });
 
             modelBuilder.Entity("SFF.Models.Rental", b =>
@@ -130,10 +137,6 @@ namespace SFF.Migrations
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SFF.Models.Movie", null)
-                        .WithMany("Rental")
-                        .HasForeignKey("MovieId1");
 
                     b.HasOne("SFF.Models.Studio", "Studio")
                         .WithMany("Rentals")
@@ -146,9 +149,11 @@ namespace SFF.Migrations
                 {
                     b.HasOne("SFF.Models.Movie", "Movie")
                         .WithMany("Trivias")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovieId");
+
+                    b.HasOne("SFF.Models.Studio", "Studio")
+                        .WithMany()
+                        .HasForeignKey("StudioId");
                 });
 #pragma warning restore 612, 618
         }

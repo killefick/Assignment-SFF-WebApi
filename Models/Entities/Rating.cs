@@ -20,7 +20,7 @@ namespace SFF.Models
 
         public double Score { get; private set; }
 
-        public int MovieId { get; private set; }
-        public Movie Movie { get; private set; }
+        public Movie Movie { get; set; }
+        public Studio Studio { get; set; }
     }
 }
