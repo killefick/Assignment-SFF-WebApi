@@ -28,6 +28,19 @@ namespace SFF.Context
                         .HasMany(m => m.Trivias)
                         .WithOne(t => t.Movie)
                         .IsRequired();
+
+            modelBuilder.Entity<Rental>()
+                        .HasKey(r => new { r.MovieId, r.StudioId });
+
+            modelBuilder.Entity<Rental>()
+                .HasOne(r => r.Movie)
+                .WithMany(m => m.Rentals)
+                .HasForeignKey(r => r.MovieId);
+
+            modelBuilder.Entity<Rental>()
+                .HasOne(r => r.Studio)
+                .WithMany(s => s.Rentals)
+                .HasForeignKey(r => r.StudioId);
         }
     }
 }

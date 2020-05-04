@@ -25,6 +25,6 @@ namespace SFF.Models
         public string Name { get; private set; }
         public string Location { get; private set; }
 
-        public ICollection<Movie> Movies { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
     }
 }

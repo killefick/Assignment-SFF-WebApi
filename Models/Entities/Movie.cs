@@ -37,7 +37,7 @@ namespace SFF.Models
 
         public ICollection<Rental> Rental { get; set; }
 
-        public ICollection<Studio> Studios { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
        
         public bool IsAvailable()
         {
