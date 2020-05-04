@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SFF.Models
@@ -24,10 +25,6 @@ namespace SFF.Models
         public string Name { get; private set; }
         public string Location { get; private set; }
 
-        public int RentalId { get; set; }
-        public Rental Rental { get; set; }
-
-        // public IList<Rental> Rental { get; set; } //collection navigation property
-
+        public ICollection<Movie> Movies { get; set; }
     }
 }

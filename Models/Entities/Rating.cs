@@ -22,9 +22,5 @@ namespace SFF.Models
 
         public int MovieId { get; private set; }
         public Movie Movie { get; private set; }
-
-        // public int StudioId { get; private set; }
-        // public List<Studio> Studio { get; private set; }
-
     }
 }

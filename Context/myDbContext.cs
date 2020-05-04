@@ -19,20 +19,15 @@ namespace SFF.Context
         // Specify DbSet properties etc
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Rental>()
-                        .HasOne(r => r.Movie)
-                        .WithMany(r => r.Rental)
-                        .HasForeignKey(r => r.MovieId);
-
-            modelBuilder.Entity<Rental>()
-                        .HasOne(t => t.Studio)
-                        .WithMany(t => t.Rental)
-                        .HasForeignKey(t => t.StudioId);
+            modelBuilder.Entity<Movie>()
+                        .HasMany(m => m.Ratings)
+                        .WithOne(r => r.Movie)
+                        .IsRequired();
 
             modelBuilder.Entity<Movie>()
-                        .HasOne<Trivia>()
-                        .WithMany()
-                        .HasForeignKey(m => m.TriviaId);
+                        .HasMany(m => m.Trivias)
+                        .WithOne(t => t.Movie)
+                        .IsRequired();
         }
     }
 }

@@ -9,10 +9,10 @@ namespace SFF.Models
     public class Rental : BaseEntity
     {
         public int MovieId { get; set; }
-        public List<Movie> Movie { get; set; }
+        public Movie Movie { get; set; }
 
         public int StudioId { get; set; }
-        public List<Studio> Studio { get; set; }
+        public Studio Studio { get; set; }
 
         public async Task<Rental> RentMovie(myDbContext _context)
         {

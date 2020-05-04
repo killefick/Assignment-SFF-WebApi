@@ -31,18 +31,14 @@ namespace SFF.Models
         public byte[] CoverPicture { get; private set; }
         public int AmountInStock { get; private set; }
 
-        // public int StudioId { get; set; }
-        // public Studio Studio { get; set; }
+        public ICollection<Trivia> Trivias { get; set; }
 
-        // public IList<Rental> Rental { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
 
-        public IList<Trivia> Trivia { get; set; }
+        public ICollection<Rental> Rental { get; set; }
 
-        public IList<Rating> Rating { get; set; }
-
-        public int RentalId { get; set; }
-        public Rental Rental { get; set; }
-
+        public ICollection<Studio> Studios { get; set; }
+       
         public bool IsAvailable()
         {
             return (this.AmountInStock > 0) ? true : false;
