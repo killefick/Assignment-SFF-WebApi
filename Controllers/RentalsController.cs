@@ -72,10 +72,6 @@ namespace SFF.Controllers
         public async Task<ActionResult<RentalDto>> PostRental(RentalDto rentalDto)
         {
             var rental = _mapper.Map<Rental>(rentalDto);
-
-            rental.MovieId = rentalDto.MovieId;
-            rental.StudioId = rentalDto.StudioId;
-
             rental = await _repository.Add(rental);
             var result = _mapper.Map<RentalDto>(rental);
 

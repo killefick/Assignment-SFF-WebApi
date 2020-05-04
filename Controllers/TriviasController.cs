@@ -72,13 +72,7 @@ namespace SFF.Controllers
         public async Task<ActionResult<TriviaDto>> PostTrivia(TriviaDto triviaDto)
         {
             var trivia = _mapper.Map<Trivia>(triviaDto);
-
-            trivia.MovieId = triviaDto.MovieId;
-            trivia.StudioId = triviaDto.StudioId;
-            trivia.TriviaText = triviaDto.TriviaText;
-
             trivia = await _repository.Add(trivia);
-
             var result = _mapper.Map<TriviaDto>(trivia);
 
             return CreatedAtAction("GetTrivia", new { id = result.Id }, result);

@@ -7,7 +7,7 @@ namespace SFF.Models
 {
     public class EtikettData
     {
-        public EtikettData()
+        private EtikettData()
         {
             // for EF only
         }

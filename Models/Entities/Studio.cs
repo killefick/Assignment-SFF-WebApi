@@ -5,7 +5,7 @@ namespace SFF.Models
 {
     public class Studio : BaseEntity
     {
-        public Studio()
+        private Studio()
         {
             // for EF only
         }

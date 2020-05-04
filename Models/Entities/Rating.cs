@@ -4,7 +4,7 @@ namespace SFF.Models
 {
     public class Rating : BaseEntity
     {
-        public Rating()
+        private Rating()
         {
             // for EF only
         }
@@ -15,6 +15,10 @@ namespace SFF.Models
             {
                 throw new ArgumentOutOfRangeException("Score must be between 1 and 5");
             }
+
+            this.Score = score;
+            this.MovieId = movieId;
+            this.StudioId = studioId;
         }
 
         public double Score { get; set; }

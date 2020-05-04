@@ -25,27 +25,9 @@ namespace SFF
             services.AddDbContext<myDbContext>(opt =>
             opt.UseSqlite("Data Source = SFF_DB.db;"));
 
-
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddAutoMapper(typeof(Startup));
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<AutomapperConfig>();
-
-                // cfg.CreateMap<Movie, MovieDto>();
-                // cfg.CreateMap<Rating, RatingDto>();
-                // cfg.CreateMap<Rental, RentalDto>();
-                // cfg.CreateMap<Studio, StudioDto>();
-                // cfg.CreateMap<Trivia, TriviaDto>();
-
-                // cfg.CreateMap<MovieDto, Movie>();
-                // cfg.CreateMap<RatingDto, Rating>();
-                // cfg.CreateMap<RentalDto, Rental>();
-                // cfg.CreateMap<StudioDto, Studio>();
-                // cfg.CreateMap<TriviaDto, Trivia>();
-            });
 
             services.AddControllers();
         }

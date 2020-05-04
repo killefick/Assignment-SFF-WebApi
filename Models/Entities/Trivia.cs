@@ -4,7 +4,7 @@ namespace SFF.Models
 {
     public class Trivia : BaseEntity
     {
-        public Trivia()
+        private Trivia()
         {
             // for EF only
         }

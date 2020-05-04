@@ -9,7 +9,7 @@ using SFF.Context;
 namespace SFF.Migrations
 {
     [DbContext(typeof(myDbContext))]
-    [Migration("20200504065026_test")]
+    [Migration("20200504073549_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

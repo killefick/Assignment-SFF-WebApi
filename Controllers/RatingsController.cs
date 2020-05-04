@@ -72,10 +72,6 @@ namespace SFF.Controllers
         public async Task<ActionResult<RatingDto>> PostRating(RatingDto ratingDto)
         {
             var rating = _mapper.Map<Rating>(ratingDto);
-
-            rating.MovieId = ratingDto.MovieId;
-            rating.StudioId = ratingDto.StudioId;
-            
             rating = await _repository.Add(rating);
             var result = _mapper.Map<RatingDto>(rating);
 

@@ -6,7 +6,7 @@ namespace SFF.Models
     public class Movie : BaseEntity
     {
 
-        public Movie()
+        private Movie()
         {
             // for EF only
         }
