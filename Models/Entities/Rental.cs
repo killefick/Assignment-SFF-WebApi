@@ -5,7 +5,7 @@ using SFF.Context;
 
 namespace SFF.Models
 {
-    public class Rental : BaseEntity
+    public class Rental
     {
         // reference navigation property
         public int MovieId { get; private set; }

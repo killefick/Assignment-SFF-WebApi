@@ -9,8 +9,8 @@ using SFF.Context;
 namespace SFF.Migrations
 {
     [DbContext(typeof(myDbContext))]
-    [Migration("20200504081433_setup")]
-    partial class setup
+    [Migration("20200504103109_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
