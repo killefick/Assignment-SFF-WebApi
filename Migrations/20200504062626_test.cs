@@ -43,8 +43,8 @@ namespace SFF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Score = table.Column<double>(nullable: false),
-                    MovieId = table.Column<int>(nullable: true),
-                    StudioId = table.Column<int>(nullable: true)
+                    MovieId = table.Column<int>(nullable: false),
+                    StudioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,13 +54,13 @@ namespace SFF.Migrations
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_Studios_StudioId",
                         column: x => x.StudioId,
                         principalTable: "Studios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,8 +95,8 @@ namespace SFF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     TriviaText = table.Column<string>(nullable: true),
-                    MovieId = table.Column<int>(nullable: true),
-                    StudioId = table.Column<int>(nullable: true)
+                    MovieId = table.Column<int>(nullable: false),
+                    StudioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,13 +106,13 @@ namespace SFF.Migrations
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Trivias_Studios_StudioId",
                         column: x => x.StudioId,
                         principalTable: "Studios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

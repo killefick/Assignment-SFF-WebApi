@@ -69,11 +69,12 @@ namespace SFF.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RatingDto>> PostRating(RatingDto RatingDto)
+        public async Task<ActionResult<RatingDto>> PostRating(RatingDto ratingDto)
         {
-            var Rating = _mapper.Map<Rating>(RatingDto);
-            Rating = await _repository.Add(Rating);
-            var result = _mapper.Map<RatingDto>(Rating);
+            var rating = _mapper.Map<Rating>(ratingDto);
+            // rating.MovieId = ratingDto.MovieId;
+            rating = await _repository.Add(rating);
+            var result = _mapper.Map<RatingDto>(rating);
 
             return CreatedAtAction("GetRating", new { id = result.Id }, result);
         }

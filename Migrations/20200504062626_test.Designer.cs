@@ -9,7 +9,7 @@ using SFF.Context;
 namespace SFF.Migrations
 {
     [DbContext(typeof(myDbContext))]
-    [Migration("20200504055047_test")]
+    [Migration("20200504062626_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,13 +44,13 @@ namespace SFF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Score")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("StudioId")
+                    b.Property<int>("StudioId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -103,10 +103,10 @@ namespace SFF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("StudioId")
+                    b.Property<int>("StudioId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TriviaText")
@@ -125,11 +125,15 @@ namespace SFF.Migrations
                 {
                     b.HasOne("SFF.Models.Movie", "Movie")
                         .WithMany("Ratings")
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SFF.Models.Studio", "Studio")
                         .WithMany()
-                        .HasForeignKey("StudioId");
+                        .HasForeignKey("StudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SFF.Models.Rental", b =>
@@ -151,11 +155,15 @@ namespace SFF.Migrations
                 {
                     b.HasOne("SFF.Models.Movie", "Movie")
                         .WithMany("Trivias")
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SFF.Models.Studio", "Studio")
                         .WithMany()
-                        .HasForeignKey("StudioId");
+                        .HasForeignKey("StudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

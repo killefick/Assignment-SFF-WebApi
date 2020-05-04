@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SFF.Context;
 using SFF.Models;
 
@@ -36,11 +29,23 @@ namespace SFF
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddAutoMapper(typeof(Startup));
+
             var config = new MapperConfiguration(cfg =>
-      {
-          cfg.AddProfile<SFFProfile>();
-          cfg.CreateMap<Studio, MovieDto>();
-      });
+            {
+                cfg.AddProfile<AutomapperConfig>();
+
+                // cfg.CreateMap<Movie, MovieDto>();
+                // cfg.CreateMap<Rating, RatingDto>();
+                // cfg.CreateMap<Rental, RentalDto>();
+                // cfg.CreateMap<Studio, StudioDto>();
+                // cfg.CreateMap<Trivia, TriviaDto>();
+
+                // cfg.CreateMap<MovieDto, Movie>();
+                // cfg.CreateMap<RatingDto, Rating>();
+                // cfg.CreateMap<RentalDto, Rental>();
+                // cfg.CreateMap<StudioDto, Studio>();
+                // cfg.CreateMap<TriviaDto, Trivia>();
+            });
 
             services.AddControllers();
         }
