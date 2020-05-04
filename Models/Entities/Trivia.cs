@@ -15,6 +15,10 @@ namespace SFF.Models
             {
                 throw new ArgumentException("Text is required");
             }
+            
+            this.TriviaText = triviaText;
+            this.StudioId = studioId;
+            this.MovieId = movieId;
         }
 
         public string TriviaText { get; set; }
