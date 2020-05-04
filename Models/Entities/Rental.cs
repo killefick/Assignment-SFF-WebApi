@@ -7,8 +7,9 @@ namespace SFF.Models
 {
     public class Rental
     {
-        // reference navigation property
+        // foreign key property
         public int MovieId { get; private set; }
+        // reference property
         public Movie Movie { get; private set; }
 
         public int StudioId { get; private set; }
