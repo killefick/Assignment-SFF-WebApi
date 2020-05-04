@@ -36,7 +36,6 @@ namespace SFF.Models
 
         public ICollection<Rating> Ratings { get; private set; }
 
-        // TODO: ska inte den vara åt andra hållet??
         public ICollection<Rental> Rentals { get; private set; }
 
         // one to one relationship
