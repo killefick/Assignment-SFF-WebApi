@@ -36,13 +36,6 @@ namespace SFF.Models
         [MaxLength (4)]
         public int AmountInStock { get; private set; }
 
-        // collection navigation property
-        // public ICollection<Trivia> Trivias { get; private set; }
-
-        // public ICollection<Rating> Ratings { get; private set; }
-
-        // public ICollection<Rental> Rentals { get; private set; }
-
         // one to one relationship
         // reference navigation property
         public EtikettData etikettData { get; set; }

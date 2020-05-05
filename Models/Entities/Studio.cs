@@ -28,7 +28,5 @@ namespace SFF.Models
         [Required]
         [MaxLength(50)]
         public string Location { get; private set; }
-
-        // public ICollection<Rental> Rentals { get; private set; }
     }
 }

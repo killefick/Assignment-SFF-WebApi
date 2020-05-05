@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using SFF.Context;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFF.Models
 {
@@ -23,7 +24,11 @@ namespace SFF.Models
             this.Datum = DateTime.Now;
         }
 
+        [Required]
+        [MaxLength(50)]
         public string FilmNamn { get; private set; }
+        [Required]
+        [MaxLength(50)]
         public string Ort { get; private set; }
         public DateTime Datum { get; private set; }
 

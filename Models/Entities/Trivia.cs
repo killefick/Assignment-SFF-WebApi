@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFF.Models
 {
@@ -21,6 +22,8 @@ namespace SFF.Models
             this.MovieId = movieId;
         }
 
+
+        [Required]
         public string TriviaText { get; private set; }
 
         // foreign key property
