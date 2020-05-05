@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SFF.Context;
 
-namespace SFF.Models
+namespace SFF.Models 
 {
     public class Rental : BaseEntity
     {
