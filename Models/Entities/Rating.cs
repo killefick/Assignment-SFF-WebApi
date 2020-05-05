@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFF.Models
 {
@@ -21,6 +22,7 @@ namespace SFF.Models
             this.StudioId = studioId;
         }
 
+        [Required]
         public double Score { get; private set; }
 
         // foreign key property

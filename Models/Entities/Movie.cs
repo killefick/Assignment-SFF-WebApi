@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFF.Models
 {
@@ -27,16 +28,20 @@ namespace SFF.Models
             this.AmountInStock = amountInStock;
         }
 
+        [Required]
+        [MaxLength (50)]
         public string Title { get; private set; }
         public byte[] CoverPicture { get; private set; }
+        [Required]
+        [MaxLength (4)]
         public int AmountInStock { get; private set; }
 
         // collection navigation property
-        public ICollection<Trivia> Trivias { get; private set; }
+        // public ICollection<Trivia> Trivias { get; private set; }
 
-        public ICollection<Rating> Ratings { get; private set; }
+        // public ICollection<Rating> Ratings { get; private set; }
 
-        public ICollection<Rental> Rentals { get; private set; }
+        // public ICollection<Rental> Rentals { get; private set; }
 
         // one to one relationship
         // reference navigation property

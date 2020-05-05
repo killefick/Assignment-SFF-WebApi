@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFF.Models
 {
@@ -21,9 +22,13 @@ namespace SFF.Models
             this.Location = location;
         }
 
-        public string Name { get;  private set; }
-        public string Location { get;  private set; }
+        [Required]
+        [MaxLength(50)]
+        public string Name { get; private set; }
+        [Required]
+        [MaxLength(50)]
+        public string Location { get; private set; }
 
-        public ICollection<Rental> Rentals { get; private set; }
+        // public ICollection<Rental> Rentals { get; private set; }
     }
 }
